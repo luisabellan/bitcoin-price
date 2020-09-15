@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
 h3 {
-    margin: 40px 0 0;
+    margin: 2rem 0 0;
 }
 
 ul {
@@ -53,10 +53,12 @@ ul {
 
 li {
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 5rem;
 }
 
 a {
-    color: #42b983;
+    color: orangered;
+    text-decoration: none;
+
 }
 </style>
