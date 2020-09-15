@@ -15,16 +15,7 @@ import axios from 'axios'
 
 export default {
     name: 'App',
-    props: {
 
-    },
-
-    method: {
-        currencydecimal(value) {
-            return value.toFixed(2)
-        },
-
-    },
     mounted() {
         axios
             .get('https://api.coindesk.com/v1/bpi/currentprice.json')
@@ -44,4 +35,4 @@ export default {
 
 <style scoped>
 
-</style>}
+</style>
