@@ -1,27 +1,47 @@
 <template>
-<img alt="Vue logo" src="./assets/logo.png">
-
-<Prices />
+<div id="app">
+    <h1>Bitcoin Price Index</h1>
+    <div v-for=" c in c" v-bind:key="c.id" class="currency">
+        {{ c.description }}:
+        <span class="lighten">
+            <span v-html="c.symbol"></span>{{ c.rate_float.toFixed(2) }}
+        </span>
+    </div>
+</div>
 </template>
 
 <script>
-import Prices from './components/Prices.vue'
+import axios from 'axios'
+
 export default {
     name: 'App',
-    components: {
+    props: {
 
-        Prices,
     },
+
+    method: {
+        currencydecimal(value) {
+            return value.toFixed(2)
+        },
+
+    },
+    mounted() {
+        axios
+            .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then(response => {
+                this.c = response.data.bpi
+            })
+            .catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => this.loading = false)
+    }
 }
 </script>
 
-<style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
-</style>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+
+<style scoped>
+
+</style>}
