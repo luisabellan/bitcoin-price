@@ -1,7 +1,7 @@
 <template>
 <div id="app">
     <h1>Bitcoin Price Index</h1>
-    <div v-for=" curr in currencies" v-bind:key="curr.id" class="currencies">
+    <div v-bind:key="curr.id" v-for=" curr in currencies" class="currencies">
         {{ curr.description }}:
         <span class="lighten">
             <span v-html="curr.symbol"></span>{{ curr.rate_float.toFixed(2) }}
@@ -13,11 +13,13 @@
 <script>
 import axios from 'axios'
 
+// todo repair axios and see about export default in main.js
+
 export default {
     name: 'App',
-    curr: [],
+    currencies: [],
 
-    computed() {
+    conputed() {
 
         axios
             .get('https://api.coindesk.com/v1/bpi/currentprice.json')
