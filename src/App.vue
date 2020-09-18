@@ -1,10 +1,10 @@
 <template>
 <div id="app">
     <h1>Bitcoin Price Index</h1>
-    <div v-for=" c in c" v-bind:key="c.id" class="currency">
-        {{ c.description }}:
+    <div v-for=" curr in currencies" v-bind:key="curr.id" class="currencies">
+        {{ curr.description }}:
         <span class="lighten">
-            <span v-html="c.symbol"></span>{{ c.rate_float.toFixed(2) }}
+            <span v-html="curr.symbol"></span>{{ curr.rate_float.toFixed(2) }}
         </span>
     </div>
 </div>
@@ -15,12 +15,15 @@ import axios from 'axios'
 
 export default {
     name: 'App',
+    curr: [],
 
-    mounted() {
+    computed() {
+
         axios
             .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-            .then(response => {
-                this.c = response.data.bpi
+            .then(res => {
+                this.currencies = res.data.bpi
+                console.log(this.curr);
             })
             .catch(error => {
                 console.log(error)
